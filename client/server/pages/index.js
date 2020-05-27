@@ -45,6 +45,7 @@ import {
 	attachI18n,
 } from 'server/render';
 import stateCache from 'server/state-cache';
+import getBootstrappedUser from 'server/user-bootstrap';
 import { createReduxStore } from 'state';
 import { setStore } from 'state/redux-store';
 import initialReducer from 'state/reducer';
@@ -476,13 +477,11 @@ function setUpLoggedInRoute( req, res, next ) {
 			return;
 		}
 
-		const user = require( 'server/user-bootstrap' ).default;
-
 		start = new Date().getTime();
 
 		debug( 'Issuing API call to fetch user object' );
 
-		const userPromise = user( req )
+		const userPromise = getBootstrappedUser( req )
 			.then( ( data ) => {
 				const end = new Date().getTime() - start;
 
@@ -952,11 +951,8 @@ export default function pages() {
 		}
 
 		// Maybe not logged in, note that you need docker to test this properly
-		const user = require( 'server/user-bootstrap' ).default;
-
 		debug( 'Issuing API call to fetch user object' );
-
-		user( req )
+		getBootstrappedUser( req )
 			.then( ( data ) => {
 				const activeFlags = get( data, 'meta.data.flags.active_flags', [] );
 
@@ -966,7 +962,7 @@ export default function pages() {
 				}
 
 				// Passed all checks, prepare support user session
-				return res.send(
+				res.send(
 					renderJsx( 'support-user', {
 						authorized: true,
 						supportUser: req.query.support_user,
@@ -982,7 +978,7 @@ export default function pages() {
 					domain: '.wordpress.com',
 				} );
 
-				return res.send( renderJsx( 'support-user' ) );
+				res.send( renderJsx( 'support-user' ) );
 			} );
 	} );
 

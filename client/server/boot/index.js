@@ -16,6 +16,7 @@ import config from 'server/config';
 import api from 'server/api';
 import pages from 'server/pages';
 import pwa from 'server/pwa';
+import devdocs from 'server/devdocs';
 
 /**
  * Returns the server HTTP request handler "app".
@@ -95,7 +96,7 @@ export default function setup() {
 	} );
 
 	if ( config.isEnabled( 'devdocs' ) ) {
-		app.use( require( 'server/devdocs' ).default() );
+		app.use( devdocs() );
 	}
 
 	if ( config.isEnabled( 'desktop' ) ) {
