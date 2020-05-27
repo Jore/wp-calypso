@@ -174,9 +174,9 @@ export const LineItemUI = styled( WPLineItem )`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	font-weight: ${( { theme, total } ) => ( total ? theme.weights.bold : theme.weights.normal) };
-	color: ${( { theme, total } ) => ( total ? theme.colors.textColorDark : theme.colors.textColor) };
-	font-size: ${( { total } ) => ( total ? '1.2em' : '1.1em') };
+	font-weight: ${( { theme, total } ) => ( total ? theme.weights.bold : theme.weights.normal )};
+	color: ${( { theme, total } ) => ( total ? theme.colors.textColorDark : theme.colors.textColor )};
+	font-size: ${( { total } ) => ( total ? '1.2em' : '1.1em' )};
 	padding: ${( { total, isSummaryVisible, tax, subtotal } ) =>
 		isSummaryVisible || total || subtotal || tax ? '10px 0' : '20px 0'};
 	border-bottom: ${( { theme, total, isSummaryVisible } ) =>
@@ -186,7 +186,7 @@ export const LineItemUI = styled( WPLineItem )`
 
 const LineItemMeta = styled.div`
 	color: ${( props ) => props.theme.colors.textColorLight};
-	display: ${( { singleLine } ) => ( singleLine ? 'flex' : 'block') };
+	display: ${( { singleLine } ) => ( singleLine ? 'flex' : 'block' )};
 	font-size: 14px;
 	justify-content: space-between;
 	width: 100%;
