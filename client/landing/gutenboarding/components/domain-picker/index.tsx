@@ -220,6 +220,7 @@ const DomainPicker: FunctionComponent< Props > = ( {
 										isSelected={
 											currentSelection?.domain_name === freeSuggestions[ 0 ].domain_name
 										}
+										categorySlug={ domainCategory }
 										onSelect={ setCurrentSelection }
 										railcarId={ railcarId ? `${ railcarId }0` : undefined }
 										recordAnalytics={ recordAnalytics || undefined }
@@ -237,6 +238,7 @@ const DomainPicker: FunctionComponent< Props > = ( {
 											suggestion={ suggestion }
 											isRecommended={ suggestion === recommendedSuggestion }
 											isSelected={ currentSelection?.domain_name === suggestion.domain_name }
+											categorySlug={ domainCategory }
 											onSelect={ setCurrentSelection }
 											key={ suggestion.domain_name }
 											railcarId={ railcarId ? `${ railcarId }${ i + 1 }` : undefined }

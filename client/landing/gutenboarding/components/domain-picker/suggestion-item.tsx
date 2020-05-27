@@ -24,6 +24,7 @@ interface Props {
 	suggestion: DomainSuggestion;
 	isRecommended?: boolean;
 	isSelected?: boolean;
+	categorySlug?: string;
 	onSelect: ( domainSuggestion: DomainSuggestion ) => void;
 	railcarId: string | undefined;
 	recordAnalytics?: ( event: RecordTrainTracksEventProps ) => void;
@@ -34,6 +35,7 @@ const DomainPickerSuggestionItem: FunctionComponent< Props > = ( {
 	suggestion,
 	isRecommended = false,
 	isSelected = false,
+	categorySlug = null,
 	onSelect,
 	railcarId,
 	recordAnalytics,
@@ -47,7 +49,9 @@ const DomainPickerSuggestionItem: FunctionComponent< Props > = ( {
 	const domainTld = domain.slice( dotPos );
 
 	const { domainSearch } = useSelect( ( select ) => select( STORE_KEY ).getState() );
-	const fetchAlgo = `/domains/search/${ DOMAIN_SUGGESTION_VENDOR }/${ FLOW_ID }`;
+	const fetchAlgo = `/domains/search/${ DOMAIN_SUGGESTION_VENDOR }/${ FLOW_ID }${
+		categorySlug ? '/' + categorySlug : ''
+	}`;
 	const [ previousDomain, setPreviousDomain ] = useState< string | undefined >();
 	const [ previousRailcarId, setPreviousRailcarId ] = useState< string | undefined >();
 
